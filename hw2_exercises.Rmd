@@ -1,0 +1,73 @@
+---
+title: "HW2"
+author: "Martha Walters"
+date: "December 3, 2024"
+output:
+html_document:
+df_print: paged
+---
+
+
+```{r setup}
+# set up
+library(tidyverse)
+library(readxl)
+library(testthat)
+library(assertthat)
+library(devtools)
+#knitr::opts_chunk$set(include = FALSE)
+```
+
+
+# Exercise 1: Function call in R packages
+
+```{r}
+load_all("../hw2")
+```
+
+```{r, include = T, warning = F}
+plot_cp(dat, est, iso_code = 4)
+plot_cp(dat, est, iso_code = 4, CI = NA)
+plot_cp(dat, est, iso_code = 404, CI = 80)
+```
+
+# Exercise 2: Add documentation 
+
+Document the arguments and output of plot_cp. To do that, add a helpfile (.Rd file in subfolder man) using the approach from the class material "documenting an r package":
+
+- add roxygen skeleton to the plot_cp function, fill in the details
+- use the function document to generate the Rd file
+
+In order to show the help file in the knitted Rmd, install the package Rd2md and use this code block:
+
+```{r}
+library(Rd2md)
+Rd2markdown(rdfile = "man/plot_cp.Rd", outfile = "plot_cp.md")
+```
+# Plot mCPR data and estimates
+
+## Description
+
+Plot mCPR data and estimates
+
+## Usage
+
+```r
+plot_cp(dat, est, iso_code, CI = 95)
+```
+
+## Arguments
+
+* `dat`: tibble which contains mCPR observations. Columns: iso, year, cp
+* `est`: tibble which contains mCPR estimates. Columns: Country or area, iso, Year, Median, U95, L95, U80, L80
+* `iso_code`: country iso code
+* `CI`: confidence intervals to be plotted. Options can be: 80, 95, or NA (no CI plotted)
+
+## Value
+
+ggplot object with mCPR observations and estimates over time
+
+# Exercise 3: GitHub
+
+https://github.com/waltersm16/hw2.git
+
